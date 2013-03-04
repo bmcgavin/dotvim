@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/rich/vams-asset-push/features'
+let g:netrw_dirhist_2='/opt/local/var/named'
+let g:netrw_dirhist_3='/Users/rich/vams-asset-push'
+let g:netrw_dirhist_4='/data/vam/htdocs'
+let g:netrw_dirhist_5='/data/vam/core'
+let g:netrw_dirhist_6='/data/vams-bridge'
+let g:netrw_dirhist_7='/Users/rich/Documents/workspace/FCSIS-VAMS/core'
+let g:netrw_dirhist_8='/Users/rich/Documents/workspace/FCSIS/system/package/comp_data'
