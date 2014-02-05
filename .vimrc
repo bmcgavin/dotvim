@@ -22,11 +22,12 @@ Bundle 'git://github.com/Valloric/YouCompleteMe.git'
 Bundle 'git://git.wincent.com/command-t.git'
 Bundle 'scrooloose/syntastic.git'
 Bundle 'scrooloose/nerdcommenter.git'
-Bundle 'Lokaltog/vim-powerline'
+" Bundle 'Lokaltog/vim-powerline'
 Bundle 'joonty/vdebug.git'
 Bundle 'tpope/vim-fugitive'
 Bundle 'shougo/vimproc'
 Bundle 'khorser/vim-repl'
+Bundle 'rodjek/vim-puppet'
 
 " Line numbers
 set number
@@ -77,9 +78,34 @@ nnoremap <C-j> :bprev<CR>
 nnoremap <C-k> :bnext<CR>
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+nnoremap <S-D-CR> :only<CR>
 
 " yum
-colorscheme desert
+colorscheme peachpuff
 
 " format JSON
 map <leader>j :%!python -m json.tool<CR>
+
+" don't put .sw? files everywhere
+set bdir-=.
+set bdir+=/tmp
+set dir-=.
+set dir+=/tmp
+
+" vdebug port clash with fpm
+"g:vdebug_options["port"] = 9001
+"
+" debugger
+let g:debuggerPort = 9001
+
+" Broken down into easily includeable segments
+set statusline=%<%f\    " Filename
+set statusline+=%w%h%m%r " Options
+set statusline+=%{fugitive#statusline()} "  Git Hotness
+set statusline+=\ [%{&ff}/%Y]            " filetype
+set statusline+=\ [%{getcwd()}]          " current dir
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_enable_signs=1
+set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
