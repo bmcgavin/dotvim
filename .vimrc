@@ -92,6 +92,8 @@ set bdir+=/tmp
 set dir-=.
 set dir+=/tmp
 
+let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+
 " vdebug port clash with fpm
 "g:vdebug_options["port"] = 9001
 "
@@ -109,3 +111,8 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_enable_signs=1
 set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+
+" breaks when a semicolon is followed by an indented comment 
+" and expandtabs is on
+let g:php_show_semicolon_error=0
+let g:php_folding=0
