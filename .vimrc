@@ -18,8 +18,8 @@ Bundle 'gmarik/vundle'
 
 " original repos on github
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'git://github.com/Valloric/YouCompleteMe.git'
-Bundle 'git://git.wincent.com/command-t.git'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'wincent/command-t'
 Bundle 'scrooloose/syntastic.git'
 Bundle 'scrooloose/nerdcommenter.git'
 " Bundle 'Lokaltog/vim-powerline'
@@ -28,6 +28,15 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'shougo/vimproc'
 Bundle 'khorser/vim-repl'
 Bundle 'rodjek/vim-puppet'
+Bundle 'godlygeek/tabular'
+Bundle 'scrooloose/nerdtree'
+Bundle 'jistr/vim-nerdtree-tabs'
+Bundle 'xolox/vim-misc'
+Bundle 'xolox/vim-easytags'
+Bundle 'majutsushi/tagbar'
+Bundle 'airblade/vim-gitgutter'
+
+Bundle 'altercation/vim-colors-solarized'
 
 " Line numbers
 set number
@@ -72,7 +81,11 @@ let mapleader = ","
 " <leader>w to open and activate new split
 nnoremap <leader>w <C-w>v<C-w>l
 nnoremap <leader>l :!php -l "%"<CR>
+nnoremap <leader>u :!vendor/bin/phpunit "%" && read<CR>
+nnoremap <leader>U :!vendor/bin/phpunit "tests/" && read<CR>
 nnoremap <leader>f yw :!grep 'function <C-r>"' * -r<CR>
+nnoremap <leader>r :set wrap<CR>
+nnoremap <leader>R :set nowrap<CR>
 
 nnoremap <C-j> :bprev<CR>
 nnoremap <C-k> :bnext<CR>
@@ -80,11 +93,22 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 nnoremap <S-D-CR> :only<CR>
 
-" yum
-colorscheme peachpuff
+nnoremap <leader>j :%!python -m json.tool<CR>
 
-" format JSON
-map <leader>j :%!python -m json.tool<CR>
+nnoremap <leader>T :NERDTreeTabsToggle<CR>
+" yum
+" colorscheme peachpuff
+let g:solarized_termcolors=256
+set background=dark
+colorscheme solarized
+" Patch GitGutter
+highlight GitGutterAddDefault guibg=#002b36
+highlight GitGutterChangeDefault guibg=#002b36
+highlight GitGutterDeleteDefault guibg=#002b36
+
+
+" To have NERDTree never open on startup
+let g:nerdtree_tabs_open_on_console_startup = 0
 
 " don't put .sw? files everywhere
 set bdir-=.
@@ -105,14 +129,38 @@ set statusline=%<%f\    " Filename
 set statusline+=%w%h%m%r " Options
 set statusline+=%{fugitive#statusline()} "  Git Hotness
 set statusline+=\ [%{&ff}/%Y]            " filetype
-set statusline+=\ [%{getcwd()}]          " current dir
+"set statusline+=\ [%{getcwd()}]          " current dir
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_enable_signs=1
 set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 
-" breaks when a semicolon is followed by an indented comment 
-" and expandtabs is on
-let g:php_show_semicolon_error=0
-let g:php_folding=0
+let g:syntastic_enable_signs=1
+let g:syntastic_check_on_open=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_loc_list_height=5
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+
+let g:CommandTMaxFiles=50000
+
+" Tags
+" ----- xolox/vim-easytags settings -----
+" Where to look for tags files
+set tags=./.vimtags;,~/.vimtags
+" Sensible defaults
+let g:easytags_events = ['BufReadPost', 'BufWritePost']
+let g:easytags_async = 1
+let g:easytags_dynamic_files = 2
+let g:easytags_resolve_links = 1
+let g:easytags_suppress_ctags_warning = 1
+
+" ----- majutsushi/tagbar settings -----
+" Open/close tagbar with ,B
+nmap <silent> <leader>B :TagbarToggle<CR>
+" Uncomment to open tagbar automatically whenever possible
+"autocmd BufEnter * nested :call tagbar#autoopen(0)
+"
+let g:ycm_collect_identifiers_from_tags_files = 1
+
+hi clear SignColumn
