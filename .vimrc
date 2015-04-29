@@ -117,6 +117,8 @@ set dir-=.
 set dir+=/tmp
 
 let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
 
 " vdebug port clash with fpm
 "g:vdebug_options["port"] = 9001
@@ -147,13 +149,14 @@ let g:CommandTMaxFiles=50000
 " Tags
 " ----- xolox/vim-easytags settings -----
 " Where to look for tags files
-set tags=./.vimtags;,~/.vimtags
+set tags=./.tags;
 " Sensible defaults
 let g:easytags_events = ['BufReadPost', 'BufWritePost']
 let g:easytags_async = 1
-let g:easytags_dynamic_files = 2
+let g:easytags_dynamic_files = 1
 let g:easytags_resolve_links = 1
 let g:easytags_suppress_ctags_warning = 1
+let g:easytags_auto_highlight = 0
 
 " ----- majutsushi/tagbar settings -----
 " Open/close tagbar with ,B
@@ -161,6 +164,12 @@ nmap <silent> <leader>B :TagbarToggle<CR>
 " Uncomment to open tagbar automatically whenever possible
 "autocmd BufEnter * nested :call tagbar#autoopen(0)
 "
-let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_collect_identifiers_from_tags_files=1
 
 hi clear SignColumn
+
+" FileType specifics
+autocmd FileType yaml setlocal shiftwidth=2 softtabstop=2
+
+let g:xml_syntax_folding=1
+au FileType xml setlocal foldmethod=syntax
