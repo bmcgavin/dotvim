@@ -10,6 +10,11 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeGlyphReadOnly = 'r'
+
 " let Vundle manage Vundle
 " required! 
 Bundle 'gmarik/vundle'
@@ -17,7 +22,7 @@ Bundle 'gmarik/vundle'
 " My Bundles here:
 
 " original repos on github
-Bundle 'Lokaltog/vim-easymotion'
+" Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'wincent/command-t'
 Bundle 'scrooloose/syntastic.git'
@@ -26,7 +31,7 @@ Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'joonty/vdebug.git'
 Bundle 'tpope/vim-fugitive'
 Bundle 'shougo/vimproc'
-Bundle 'khorser/vim-repl'
+" Bundle 'khorser/vim-repl'
 Bundle 'rodjek/vim-puppet'
 Bundle 'godlygeek/tabular'
 Bundle 'scrooloose/nerdtree'
@@ -35,11 +40,23 @@ Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-easytags'
 Bundle 'majutsushi/tagbar'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'fatih/vim-go'
+Bundle 'tpope/vim-fireplace'
 
 Bundle 'altercation/vim-colors-solarized'
 
 " Line numbers
 set number
+
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <leader>n :call NumberToggle()<cr>
 
 " Make backspace behave in a sane manner.
 set backspace=indent,eol,start
@@ -86,6 +103,7 @@ nnoremap <leader>U :!vendor/bin/phpunit "tests/" && read<CR>
 nnoremap <leader>f yw :!grep 'function <C-r>"' * -r<CR>
 nnoremap <leader>r :set wrap<CR>
 nnoremap <leader>R :set nowrap<CR>
+nnoremap <leader>s :so $MYVIMRC<CR>
 
 nnoremap <C-j> :bprev<CR>
 nnoremap <C-k> :bnext<CR>
@@ -121,10 +139,10 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 
 " vdebug port clash with fpm
-"g:vdebug_options["port"] = 9001
-"
-" debugger
-let g:debuggerPort = 9001
+if !exists('g:vdebug_options')
+  let g:vdebug_options = {}
+endif
+let g:vdebug_options["port"] = 10123
 
 " Broken down into easily includeable segments
 set statusline=%<%f\    " Filename
@@ -139,12 +157,13 @@ let g:syntastic_enable_signs=1
 set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 
 let g:syntastic_enable_signs=1
-let g:syntastic_check_on_open=1
-let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=0
+let g:syntastic_auto_loc_list=0
 let g:syntastic_loc_list_height=5
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
 let g:CommandTMaxFiles=50000
+let g:CommandTTraverseSCM="pwd"
 
 " Tags
 " ----- xolox/vim-easytags settings -----
