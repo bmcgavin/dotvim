@@ -42,7 +42,7 @@ Bundle 'majutsushi/tagbar'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'fatih/vim-go'
 Bundle 'tpope/vim-fireplace'
-
+Bundle 'kannokanno/previm'
 Bundle 'altercation/vim-colors-solarized'
 
 " Line numbers
@@ -192,3 +192,13 @@ autocmd FileType yaml setlocal shiftwidth=2 softtabstop=2
 
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
+
+" Previm
+let g:previm_open_cmd = 'default'
+if has("macunix")
+  let g:previm_open_cmd = 'open -a /Applications/Firefox.app/Contents/MacOS/firefox'
+elseif has("unix")
+  let g:previm_open_cmd = 'firefox'
+elseif has("win64")
+  let g:previm_open_cmd = 'c:\\Program\ Files\ (x86)\\Firefox\\firefox'
+endif
