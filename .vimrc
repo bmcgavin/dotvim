@@ -22,17 +22,13 @@ Bundle 'gmarik/vundle'
 " My Bundles here:
 
 " original repos on github
-" Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'wincent/command-t'
 Bundle 'scrooloose/syntastic.git'
 Bundle 'scrooloose/nerdcommenter.git'
-" Bundle 'Lokaltog/vim-powerline'
 Bundle 'joonty/vdebug.git'
 Bundle 'tpope/vim-fugitive'
 Bundle 'shougo/vimproc'
-" Bundle 'khorser/vim-repl'
-Bundle 'rodjek/vim-puppet'
 Bundle 'godlygeek/tabular'
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
@@ -40,13 +36,13 @@ Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-easytags'
 Bundle 'majutsushi/tagbar'
 Bundle 'airblade/vim-gitgutter'
-Bundle 'fatih/vim-go'
 Bundle 'tpope/vim-salve'
 Bundle 'tpope/vim-projectionist'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-fireplace'
 Bundle 'kannokanno/previm'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'sheerun/vim-polyglot'
 
 " Line numbers
 set number
@@ -77,9 +73,6 @@ set hlsearch
 " Enable file type detection and do language-dependent indenting.
 filetype plugin indent on
 
-" tabwidth
-set tabstop=4
-
 " No eof newline
 set noeol
 set binary
@@ -88,11 +81,13 @@ set binary
 set expandtab
 set shiftwidth=4
 set softtabstop=4
+set tabstop=4
 
 " syntastic
 "let g:syntastic_php_phpcs_args=['--report=csv']
 "let g:syntastic_php_checkers=['php', 'phpcs']
 let g:syntastic_php_checkers=['php']
+let g:syntastic_javascript_checkers = ['eslint']
 
 
 " remap leader to ,
@@ -167,6 +162,7 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
 let g:CommandTMaxFiles=50000
 let g:CommandTTraverseSCM="pwd"
+let g:CommandTFileScanner="git"
 
 " Tags
 " ----- xolox/vim-easytags settings -----
@@ -192,6 +188,7 @@ hi clear SignColumn
 
 " FileType specifics
 autocmd FileType yaml setlocal shiftwidth=2 softtabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2
 
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
