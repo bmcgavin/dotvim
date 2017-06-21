@@ -29,9 +29,7 @@ Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'joonty/vdebug.git'
 Bundle 'tpope/vim-fugitive'
 Bundle 'shougo/vimproc'
-Bundle 'godlygeek/tabular'
 Bundle 'scrooloose/nerdtree'
-Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-easytags'
 Bundle 'majutsushi/tagbar'
@@ -189,6 +187,8 @@ hi clear SignColumn
 " FileType specifics
 autocmd FileType yaml setlocal shiftwidth=2 softtabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2
+autocmd FileType json setlocal shiftwidth=2 softtabstop=2
+autocmd FileType html setlocal shiftwidth=2 softtabstop=2
 
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
