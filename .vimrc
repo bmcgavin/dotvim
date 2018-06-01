@@ -41,6 +41,7 @@ Bundle 'tpope/vim-fireplace'
 Bundle 'kannokanno/previm'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'sheerun/vim-polyglot'
+Bundle 'fatih/vim-go'
 
 " Line numbers
 set number
@@ -130,7 +131,7 @@ set bdir+=/tmp
 set dir-=.
 set dir+=/tmp
 
-let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+let g:ycm_python_binary_path = '/usr/bin/python'
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 
@@ -160,7 +161,7 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
 let g:CommandTMaxFiles=50000
 let g:CommandTTraverseSCM="pwd"
-let g:CommandTFileScanner="git"
+let g:CommandTFileScanner="find"
 
 " Tags
 " ----- xolox/vim-easytags settings -----
@@ -195,8 +196,11 @@ au FileType xml setlocal foldmethod=syntax
 
 " Previm
 let g:previm_open_cmd = 'default'
+
 if has("macunix")
   let g:previm_open_cmd = 'open -a /Applications/Firefox.app/Contents/MacOS/firefox'
+  set rubydll=/usr/local/lib/libruby.2.4.dylib
+  let g:ycm_python_binary_path = '/usr/local/bin/python3'
 elseif has("unix")
   let g:previm_open_cmd = 'firefox'
 elseif has("win64")
