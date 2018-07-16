@@ -29,7 +29,9 @@ Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'joonty/vdebug.git'
 Bundle 'tpope/vim-fugitive'
 Bundle 'shougo/vimproc'
+Bundle 'godlygeek/tabular'
 Bundle 'scrooloose/nerdtree'
+Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-easytags'
 Bundle 'majutsushi/tagbar'
@@ -188,19 +190,36 @@ hi clear SignColumn
 " FileType specifics
 autocmd FileType yaml setlocal shiftwidth=2 softtabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2
-autocmd FileType json setlocal shiftwidth=2 softtabstop=2
-autocmd FileType html setlocal shiftwidth=2 softtabstop=2
 
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
+
+" large files
+" Protect large files from sourcing and other overhead.
+" Files become read only
+if !exists("my_auto_commands_loaded")
+  let my_auto_commands_loaded = 1
+  " Large files are > 10M
+  " Set options:
+  " eventignore+=FileType (no syntax highlighting etc
+  " assumes FileType always on)
+  " noswapfile (save copy of file)
+  " bufhidden=unload (save memory when other file is viewed)
+  " buftype=nowrite (file is read-only)
+  " undolevels=-1 (no undo possible)
+  let g:LargeFile = 1024 * 1024 * 10
+  augroup LargeFile
+    autocmd BufReadPre * let f=expand("<afile>") | if getfsize(f) > g:LargeFile | set eventignore+=FileType | setlocal noswapfile bufhidden=unload buftype=nowrite | else | set eventignore-=FileType | endif
+  augroup END
+endif
 
 " Previm
 let g:previm_open_cmd = 'default'
 
 if has("macunix")
   let g:previm_open_cmd = 'open -a /Applications/Firefox.app/Contents/MacOS/firefox'
-  set rubydll=/usr/local/lib/libruby.2.4.dylib
-  let g:ycm_python_binary_path = '/usr/local/bin/python3'
+  " set rubydll=/usr/local/lib/libruby.2.3.dylib
+  let g:ycm_python_binary_path = '/usr/local/bin/python'
 elseif has("unix")
   let g:previm_open_cmd = 'firefox'
 elseif has("win64")
