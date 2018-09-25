@@ -10,4 +10,4 @@ ruby extconf.rb
 make
 cd ~/.vim
 cd bundle/YouCompleteMe
-./install.sh
+./install.py

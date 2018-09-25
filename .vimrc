@@ -26,7 +26,7 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'wincent/command-t'
 Bundle 'scrooloose/syntastic.git'
 Bundle 'scrooloose/nerdcommenter.git'
-Bundle 'joonty/vdebug.git'
+" Bundle 'joonty/vdebug.git'
 Bundle 'tpope/vim-fugitive'
 Bundle 'shougo/vimproc'
 Bundle 'godlygeek/tabular'
@@ -36,7 +36,6 @@ Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-easytags'
 Bundle 'majutsushi/tagbar'
 Bundle 'airblade/vim-gitgutter'
-Bundle 'tpope/vim-salve'
 Bundle 'tpope/vim-projectionist'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-fireplace'
@@ -215,6 +214,9 @@ endif
 
 " Previm
 let g:previm_open_cmd = 'default'
+
+" clj
+nnoremap <leader>e :Eval<cr>
 
 if has("macunix")
   let g:previm_open_cmd = 'open -a /Applications/Firefox.app/Contents/MacOS/firefox'
