@@ -30,6 +30,7 @@ Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'tpope/vim-fugitive'
 Bundle 'shougo/vimproc'
 Bundle 'godlygeek/tabular'
+
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'xolox/vim-misc'
@@ -39,6 +40,11 @@ Bundle 'airblade/vim-gitgutter'
 Bundle 'tpope/vim-projectionist'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-fireplace'
+Bundle 'tpope/vim-surround'
+Bundle 'vim-scripts/paredit.vim'
+" needs lein-cljfmt on classpath
+Bundle 'venantius/vim-cljfmt' 
+Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'kannokanno/previm'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'sheerun/vim-polyglot'
@@ -217,6 +223,8 @@ let g:previm_open_cmd = 'default'
 
 " clj
 nnoremap <leader>e :Eval<cr>
+nnoremap <leader>E :Eval 
+nnoremap <leader>L :Require!<cr>
 
 if has("macunix")
   let g:previm_open_cmd = 'open -a /Applications/Firefox.app/Contents/MacOS/firefox'
