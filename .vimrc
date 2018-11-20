@@ -10,11 +10,6 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-let g:NERDTreeDirArrows = 1
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-let g:NERDTreeGlyphReadOnly = 'r'
-
 " let Vundle manage Vundle
 " required! 
 Bundle 'gmarik/vundle'
@@ -22,15 +17,20 @@ Bundle 'gmarik/vundle'
 " My Bundles here:
 
 " original repos on github
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'wincent/command-t'
+Bundle 'fatih/vim-go'
+" Bundle 'Valloric/YouCompleteMe'
+Bundle 'Shougo/deoplete.nvim'
+Bundle 'roxma/nvim-yarp'
+Bundle 'roxma/vim-hug-neovim-rpc'
+Bundle 'zchee/deoplete-go'
+" Bundle 'wincent/command-t'
+Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'scrooloose/syntastic.git'
 Bundle 'scrooloose/nerdcommenter.git'
 " Bundle 'joonty/vdebug.git'
 Bundle 'tpope/vim-fugitive'
-Bundle 'shougo/vimproc'
+" Bundle 'shougo/vimproc'
 Bundle 'godlygeek/tabular'
-
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'xolox/vim-misc'
@@ -48,7 +48,12 @@ Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'kannokanno/previm'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'sheerun/vim-polyglot'
-Bundle 'fatih/vim-go'
+
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeGlyphReadOnly = 'RO'
+let g:NERDTreeNodeDelimiter = "\u00a0"
 
 " Line numbers
 set number
@@ -89,6 +94,9 @@ set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 
+" deoplete
+let g:deoplete#enable_at_startup = 1
+
 " syntastic
 "let g:syntastic_php_phpcs_args=['--report=csv']
 "let g:syntastic_php_checkers=['php', 'phpcs']
@@ -108,6 +116,9 @@ nnoremap <leader>f yw :!grep 'function <C-r>"' * -r<CR>
 nnoremap <leader>r :set wrap<CR>
 nnoremap <leader>R :set nowrap<CR>
 nnoremap <leader>s :so $MYVIMRC<CR>
+
+" ctrlp like command-t
+nnoremap <leader>t :CtrlP .<CR>
 
 nnoremap <C-j> :bprev<CR>
 nnoremap <C-k> :bnext<CR>
@@ -138,9 +149,9 @@ set bdir+=/tmp
 set dir-=.
 set dir+=/tmp
 
-let g:ycm_python_binary_path = '/usr/bin/python'
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_python_binary_path = '/usr/bin/python'
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+" let g:ycm_autoclose_preview_window_after_completion = 1
 
 " vdebug port clash with fpm
 if !exists('g:vdebug_options')
@@ -188,7 +199,7 @@ nmap <silent> <leader>B :TagbarToggle<CR>
 " Uncomment to open tagbar automatically whenever possible
 "autocmd BufEnter * nested :call tagbar#autoopen(0)
 "
-let g:ycm_collect_identifiers_from_tags_files=1
+" let g:ycm_collect_identifiers_from_tags_files=1
 
 hi clear SignColumn
 
@@ -198,6 +209,7 @@ autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2
 
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
+au FileType json setlocal foldmethod=syntax
 
 " large files
 " Protect large files from sourcing and other overhead.
@@ -225,6 +237,17 @@ let g:previm_open_cmd = 'default'
 nnoremap <leader>e :Eval<cr>
 nnoremap <leader>E :Eval 
 nnoremap <leader>L :Require!<cr>
+
+" go
+let g:go_metalinter_autosave = 1
+let g:go_fmt_command = "goimports"
+
+let g:deoplete#sources#go#gocode_binary = "/Users/rjones/go/bin/gocode"
+
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 if has("macunix")
   let g:previm_open_cmd = 'open -a /Applications/Firefox.app/Contents/MacOS/firefox'
