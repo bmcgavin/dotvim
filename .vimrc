@@ -40,8 +40,11 @@ Bundle 'airblade/vim-gitgutter'
 Bundle 'tpope/vim-projectionist'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-fireplace'
+" Bundle 'vim-scripts/paredit.vim'
+Bundle 'tpope/vim-sexp-mappings-for-regular-people'
+Bundle 'guns/vim-sexp'
+Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
-Bundle 'vim-scripts/paredit.vim'
 " needs lein-cljfmt on classpath
 Bundle 'venantius/vim-cljfmt' 
 Bundle 'kien/rainbow_parentheses.vim'
@@ -243,9 +246,13 @@ nnoremap <leader>L :Require!<cr>
 " go
 let g:go_metalinter_autosave = 1
 let g:go_fmt_command = "goimports"
+set completeopt-=preview
 
 " python
 set pyxversion=3
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
