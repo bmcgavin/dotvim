@@ -118,6 +118,7 @@ nnoremap <leader>R :set nowrap<CR>
 nnoremap <leader>s :so $MYVIMRC<CR>
 
 " ctrlp like command-t
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 nnoremap <leader>t :CtrlP .<CR>
 
 nnoremap <C-j> :bprev<CR>
@@ -206,6 +207,7 @@ hi clear SignColumn
 " FileType specifics
 autocmd FileType yaml setlocal shiftwidth=2 softtabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2
+autocmd FileType typescript setlocal shiftwidth=2 softtabstop=2
 
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
@@ -242,7 +244,8 @@ nnoremap <leader>L :Require!<cr>
 let g:go_metalinter_autosave = 1
 let g:go_fmt_command = "goimports"
 
-let g:deoplete#sources#go#gocode_binary = "/Users/rjones/go/bin/gocode"
+" python
+set pyxversion=3
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
@@ -253,8 +256,11 @@ if has("macunix")
   let g:previm_open_cmd = 'open -a /Applications/Firefox.app/Contents/MacOS/firefox'
   " set rubydll=/usr/local/lib/libruby.2.3.dylib
   let g:ycm_python_binary_path = '/usr/local/bin/python'
+  let g:deoplete#sources#go#gocode_binary = "/Users/rjones/go/bin/gocode"
 elseif has("unix")
   let g:previm_open_cmd = 'firefox'
+  let g:deoplete#sources#go#gocode_binary = "/home/rich/go/bin/gocode"
+  set guioptions-=T
 elseif has("win64")
   let g:previm_open_cmd = 'c:\\Program\ Files\ (x86)\\Firefox\\firefox'
 endif
