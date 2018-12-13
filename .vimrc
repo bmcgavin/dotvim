@@ -247,6 +247,7 @@ nnoremap <leader>L :Require!<cr>
 let g:go_metalinter_autosave = 1
 let g:go_fmt_command = "goimports"
 set completeopt-=preview
+nnoremap <leader>g iif err != nil {<cr>return nil, err<cr>}<cr>
 
 " python
 set pyxversion=3
