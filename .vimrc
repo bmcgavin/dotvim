@@ -123,6 +123,7 @@ nnoremap <leader>s :so $MYVIMRC<CR>
 " ctrlp like command-t
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 nnoremap <leader>t :CtrlP .<CR>
+let g:ctrlp_working_path_mode = 'ra'
 
 nnoremap <C-j> :bprev<CR>
 nnoremap <C-k> :bnext<CR>
@@ -246,6 +247,10 @@ nnoremap <leader>L :Require!<cr>
 " go
 let g:go_metalinter_autosave = 1
 let g:go_fmt_command = "goimports"
+let g:go_debug_windows = {
+    \ 'stack': 'botright 10new',
+    \ 'vars': 'topleft 20vnew',
+\ }
 set completeopt-=preview
 nnoremap <leader>g iif err != nil {<cr>return nil, err<cr>}<cr>
 
