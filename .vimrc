@@ -51,6 +51,8 @@ Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'kannokanno/previm'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'sheerun/vim-polyglot'
+Bundle 'junegunn/goyo.vim'
+Bundle 'reedes/vim-pencil'
 
 let g:NERDTreeDirArrows = 1
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -182,9 +184,9 @@ let g:syntastic_auto_loc_list=0
 let g:syntastic_loc_list_height=5
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
-let g:CommandTMaxFiles=50000
-let g:CommandTTraverseSCM="pwd"
-let g:CommandTFileScanner="find"
+" from pc
+" let g:gitgutter_realtime = 0
+" let g:gitgutter_eager = 0
 
 " Tags
 " ----- xolox/vim-easytags settings -----
@@ -203,8 +205,6 @@ let g:easytags_auto_highlight = 0
 nmap <silent> <leader>B :TagbarToggle<CR>
 " Uncomment to open tagbar automatically whenever possible
 "autocmd BufEnter * nested :call tagbar#autoopen(0)
-"
-" let g:ycm_collect_identifiers_from_tags_files=1
 
 hi clear SignColumn
 
@@ -212,10 +212,27 @@ hi clear SignColumn
 autocmd FileType yaml setlocal shiftwidth=2 softtabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2
 autocmd FileType typescript setlocal shiftwidth=2 softtabstop=2
+autocmd FileType json setlocal shiftwidth=2 softtabstop=2
 
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
 au FileType json setlocal foldmethod=syntax
+
+" super (as ctrl via autokey)
+nmap  :w<cr>
+imap  <ESC>l:w<cr>i
+nmap  :!gvim<cr><cr>
+
+" alt
+nmap ó :w<cr>
+imap ó <ESC>l:w<cr>i
+nmap ÷ :clo<cr>
+nmap á ggVG<cr>
+map ã "+y
+map ö "+P
+imap ã <ESC>"+yi
+imap ö <ESC>"+Pi
+vmap ö <ESC>"+Pv
 
 " large files
 " Protect large files from sourcing and other overhead.
@@ -245,6 +262,7 @@ nnoremap <leader>E :Eval
 nnoremap <leader>L :Require!<cr>
 
 " go
+nnoremap <leader>gg iif err != nil {<CR>return nil, err<CR>}<CR>
 let g:go_metalinter_autosave = 1
 let g:go_fmt_command = "goimports"
 let g:go_debug_windows = {
@@ -265,6 +283,7 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
+let g:previm_open_cmd = 'default'
 if has("macunix")
   let g:previm_open_cmd = 'open -a /Applications/Firefox.app/Contents/MacOS/firefox'
   " set rubydll=/usr/local/lib/libruby.2.3.dylib
@@ -277,3 +296,13 @@ elseif has("unix")
 elseif has("win64")
   let g:previm_open_cmd = 'c:\\Program\ Files\ (x86)\\Firefox\\firefox'
 endif
+
+set guioptions-=m
+
+"
+" Markdown specific stuff.
+"
+" Change default app for Vim-marked. I have Marked2, but it is just called "Marked". Maybe because it is the non-AS version?
+"let g:marked_app = "Marked"
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd Filetype markdown Goyo
