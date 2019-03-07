@@ -60,19 +60,6 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDTreeGlyphReadOnly = 'RO'
 let g:NERDTreeNodeDelimiter = "\u00a0"
 
-" Line numbers
-set number
-
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set norelativenumber
-  else
-    set relativenumber
-  endif
-endfunc
-
-nnoremap <leader>n :call NumberToggle()<cr>
-
 " Make backspace behave in a sane manner.
 set backspace=indent,eol,start
 
@@ -262,7 +249,6 @@ nnoremap <leader>E :Eval
 nnoremap <leader>L :Require!<cr>
 
 " go
-nnoremap <leader>gg iif err != nil {<CR>return nil, err<CR>}<CR>
 let g:go_metalinter_autosave = 1
 let g:go_fmt_command = "goimports"
 let g:go_debug_windows = {
@@ -283,6 +269,18 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
+" Line numbers
+set number
+
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <leader>n :call NumberToggle()<cr>
 let g:previm_open_cmd = 'default'
 if has("macunix")
   let g:previm_open_cmd = 'open -a /Applications/Firefox.app/Contents/MacOS/firefox'
